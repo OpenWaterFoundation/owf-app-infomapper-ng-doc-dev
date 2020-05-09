@@ -97,5 +97,5 @@ This repository is maintained by the [Open Water Foundation](http://openwaterfou
 
 ## Release Notes ##
 
-Release notes for the software are included in [user documentation](http://software.openwaterfoundation.org/infomapper/latest/doc-user/appendix-release-notes/release-notes/).
-
+Changes to developer documentation are tracked in issues for the
+[GitHub repository](https://github.com/OpenWaterFoundation/owf-app-info-mapper-ng-doc-dev/issues).
