@@ -57,7 +57,6 @@ QGIS is open source desktop GIS software that can be used to view and process sp
 
 * [QGIS website](https://www.qgis.org)
 * [OWF / Learn QGIS](http://learn.openwaterfoundation.org/owf-learn-qgis/)
-* [OWF notes on QGIS installation](qgis-version-install-experiments.md) - experiments to understand how to install different QGIS versions
 
 ## Visual Studio Code ##
 
