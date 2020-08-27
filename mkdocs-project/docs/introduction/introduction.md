@@ -49,5 +49,6 @@ while leveraging open data standards and open source software tools.
 OWF seeks and accepts funding to enhance the software, provide training,
 and implement the software on projects.
 
-Use the [InfoMapper repository issues page](https://github.com/OpenWaterFoundation/owf-app-info-mapper-ng/issues)
+Use the [InfoMapper repository issues page](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng/issues)
 or contact project maintainers to provide input.
+Other repositories may be used to track issues on specific implementations.

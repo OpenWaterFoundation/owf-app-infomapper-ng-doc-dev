@@ -14,7 +14,7 @@ manage when milestone releases are made.
 Version control for the InfoMapper uses a feature/topic branch approach where
 the `master` branch contains the main working code and feature/topic branches are used to fix bugs or add new features.
 Currently, a `dev` branch parallel to `master` is not used.
-[GitHub issues](https://github.com/OpenWaterFoundation/owf-app-info-mapper-ng/issues) are used to track bugs and feature requests.
+[GitHub issues](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng/issues) are used to track bugs and feature requests.
 
 Stable versions of the InfoMapper are released by coordinating resolution of issues.
 When a version is stable on the supported platforms,
@@ -42,7 +42,7 @@ More sophisticated use of Git will be implemented as time allows and developer s
 
 ## Git Utility Scripts ##
 
-The following `build-util` scripts are provided in the main `owf-app-info-mapper-ng` repository
+The following `build-util` scripts are provided in the main `owf-app-infomapper-ng` repository
 to facilitate Git use and can be run from Cygwin, Git Bash, and Linux command line.
 These scripts are aware of the multiple repositories that comprise the InfoMapper.
 
