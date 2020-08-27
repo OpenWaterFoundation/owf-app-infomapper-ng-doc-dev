@@ -14,3 +14,5 @@ Need to discuss Angular approach and overall design concepts.
 ## Application ##
 
 Need to discuss the application... entry point, etc.
+
+## Need to describe major components in sections or separate files

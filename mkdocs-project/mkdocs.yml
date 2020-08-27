@@ -17,6 +17,7 @@ nav:
   - Documenting: dev-tasks/documenting.md
   - Running: dev-tasks/running.md
   - Testing: dev-tasks/testing.md
+  - Deploying: dev-tasks/deploying.md
   - Creating Installer: dev-tasks/creating-installer.md
 - Development Environment:
   - Overview: 'dev-env/overview.md'
@@ -53,7 +54,7 @@ google_analytics:
 # ------------------------------------------------
 # Don't specify the repository because doing show shows irritating edit
 # icons on every page - instead, edit the documentation in the developer environment.
-#repo_url:  https://github.com/OpenWaterFoundation/owf-app-info-mapper-ng
+#repo_url:  https://github.com/OpenWaterFoundation/owf-app-infomapper-ng
 # ------------------------------------------------
 site_author:  'Open Water Foundation'
 site_description:  'Open Water Foundation Learn InfoMapper (for Developers)'
@@ -62,7 +63,7 @@ site_description:  'Open Water Foundation Learn InfoMapper (for Developers)'
 # - installation notes:  https://github.com/squidfunk/mkdocs-material
 theme:
   name: 'material'
-  favicon:  'img/favicon.ico'
+  favicon:  'images/favicon.ico'
 # ------------------------------------------------
 # The following controls how URLs are created
 # - As of MkDocs 1.0 the default is true meaning URLs to a page ABC is ABC/ rather than something/ABC.html.

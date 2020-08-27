@@ -5,11 +5,11 @@ Open Water Foundation (OWF) InfoMapper software,
 which is a web application to display maps and other information products.  See also:
 
 * Latest [InfoMapper User Documentation](http://software.openwaterfoundation.org/infomapper/latest/doc-user/)
-* [InfoMapper download website](http://software.openwaterfoundation.org/infomapper/)
+* InfoMapper download website - currently must be cloned from the
+[InfoMapper GitHub repository](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng)
 
 **The InfoMapper software is under development as an open source software project at the Open Water Foundation.
-Although significant progress has been made, it is expected that significant changes will occur in the
-near future as new features are added.**
+Core features are stable.  However, additional changes will occur as the software is used on multiple projects.**
 
 This documentation is intended for InfoMapper developers that have (or would like to acquire) experience with Angular,
 GeoProcessor, and TSTool software.
@@ -46,10 +46,6 @@ Use the search feature to find documentation matching the search words.
 See also the [OWF GeoProcessor User Documentation](http://software.openwaterfoundation.org/geoprocessor/latest/doc-user/),
 which provides documentation for installing and using the GeoProcessor.
 
-Significant development may have occurred that is not reflected in the latest published documentation.
-See also the [InfoMapper product page](http://software.openwaterfoundation.org/infomapper/) for access
-to development version of documentation.
-
 ## License ##
 
 The OWF InfoMapper developer documentation is licensed under the
@@ -60,7 +56,7 @@ The InfoMapper software is distributed under GPL v3 license.
 ## Source Repository on GitHub ##
 
 The source files for this documentation are available in the
-[owf-app-info-mapper-ng-doc-dev GitHub repository](https://github.com/OpenWaterFoundation/owf-app-info-mapper-ng-doc-dev)
+[owf-app-infomapper-ng-doc-dev GitHub repository](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng-doc-dev)
 
 ## Release Notes ##
 

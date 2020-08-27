@@ -1,4 +1,6 @@
 #!/bin/sh
+(set -o igncr) 2>/dev/null && set -o igncr; # this comment is required
+# The above line ensures that the script can be run on Cygwin/Linux even with Windows CRNL
 #
 # Copy the site/* contents to the software.openwaterfoundation.org website
 # - replace all the files on the web with local files
@@ -14,7 +16,16 @@ checkMkdocsVersion() {
   # Required MkDocs version is at least 1
   requiredMajorVersion="1"
   # On Cygwin, mkdocs --version gives:  mkdocs, version 1.0.4 from /usr/lib/python3.6/site-packages/mkdocs (Python 3.6)
-  mkdocsVersionFull=$(mkdocs --version)
+  # On Debian Linux, similar to Cygwin:  mkdocs, version 0.17.3
+  if [ "$operatingSystem" = "cygwin" -o "$operatingSystem" = "linux" ]; then
+    mkdocsVersionFull=$(mkdocs --version)
+  elif [ "$operatingSystem" = "mingw" ]; then
+    mkdocsVersionFull=$(py -m mkdocs --version)
+  else
+    echo ""
+    echo "Don't know how to run on operating system $operatingSystem"
+    exit 1
+  fi
   echo "MkDocs --version:  $mkdocsVersionFull"
   mkdocsVersion=$(echo $mkdocsVersionFull | cut -d ' ' -f 3)
   echo "MkDocs full version number:  $mkdocsVersion"
@@ -31,6 +42,29 @@ checkMkdocsVersion() {
   fi
 }
 
+# Determine the operating system that is running the script
+# - mainly care whether Cygwin or MINGW
+checkOperatingSystem()
+{
+  if [ ! -z "${operatingSystem}" ]; then
+    # Have already checked operating system so return
+    return
+  fi
+  operatingSystem="unknown"
+  os=`uname | tr [a-z] [A-Z]`
+  case "${os}" in
+    CYGWIN*)
+      operatingSystem="cygwin"
+      ;;
+    LINUX*)
+      operatingSystem="linux"
+      ;;
+    MINGW*)
+      operatingSystem="mingw"
+      ;;
+  esac
+}
+
 # Check the source files for issues
 # - the main issue is internal links need to use [](file.md), not [](file)
 checkSourceDocs() {
@@ -39,7 +73,7 @@ checkSourceDocs() {
   :
 }
 
-# Get the Info Mapper version.
+# Get the InfoMapper version.
 # - the version is in the 'assets/version.json' file in format:  "version": "0.7.0.dev (2020-04-24)"
 getVersion() {
   infoMapperVersionFile="${infoMapperAssetsFolder}/version.json"
@@ -47,6 +81,9 @@ getVersion() {
 }
 
 # Entry point into the script
+
+# Check the operating system
+checkOperatingSystem
 
 # Make sure the MkDocs version is OK
 checkMkdocsVersion
@@ -58,8 +95,8 @@ checkSourceDocs
 scriptFolder=$(cd $(dirname "$0") && pwd)
 repoFolder=$(dirname ${scriptFolder})
 gitReposFolder=$(dirname ${repoFolder})
-infoMapperRepoFolder="${gitReposFolder}/owf-app-info-mapper-ng"
-infoMapperMainFolder="${infoMapperRepoFolder}/info-mapper"
+infoMapperRepoFolder="${gitReposFolder}/owf-app-infomapper-ng"
+infoMapperMainFolder="${infoMapperRepoFolder}/infomapper"
 infoMapperAssetsFolder="${infoMapperMainFolder}/src/assets"
 
 echo "Script folder = ${scriptFolder}"
@@ -93,34 +130,53 @@ awsProfile="$1"
 # - "mkdocs serve" does not do this
 
 echo "Building mkdocs-project/site folder..."
-cd ../mkdocs-project
-mkdocs build --clean
+cd "${repoFolder}/mkdocs-project"
+if [ "$operatingSystem" = "cygwin" -o "$operatingSystem" = "linux" ]; then
+  mkdocs build --clean
+elif [ "$operatingSystem" = "mingw" ]; then
+  # This is used by Git Bash
+  py -m mkdocs build --clean
+fi
 cd ${scriptFolder}
 
-# Now sync the local files up to Amazon S3
-if [ -n "${version}" ]; then
-  # Upload documentation to the versioned folder
-  echo "Uploading documentation to:  ${s3VersionFolder}"
+# Now sync the local files up to Amazon S3, for version and latest
+exitStatus=0
+for versionFolder in ${s3VersionFolder} ${s3LatestFolder}; do
+  echo ""
+  echo "Uploading documentation to:  ${versionFolder}"
   read -p "Continue [Y/n/q]? " answer
-  if [ -z "${answer}" -o "${answer}" = "y" -o "${answer}" = "Y" ]; then 
-    aws s3 sync ../mkdocs-project/site ${s3VersionFolder} ${dryrun} --delete --profile "$awsProfile"
-    exitStatusVersion=$?
-  elif [ "${answer}" = "q" ]; then 
+  if [ "${answer}" = "q" -o "${answer}" = "Q" ]; then 
     exit 0
+  elif [ -z "${answer}" -o "${answer}" = "y" -o "${answer}" = "Y" ]; then 
+    if [ "$operatingSystem" = "mingw" ]; then
+      # If "aws" is in path, run it
+      if [ "$(which aws 2> /dev/null | cut -c 1)" = "/" ]; then
+        # Found aws
+        aws s3 sync ../mkdocs-project/site ${versionFolder} ${dryrun} --delete --profile "$awsProfile"
+        exitStatus=$(expr ${exitStatus} + $?)
+      else
+        # Figure out the Python installation path
+        pythonExePath=$(py -c "import sys; print(sys.executable)")
+        if [ -n "$pythonExePath" ]; then
+          # Path will be something like:  C:\Users\sam\AppData\Local\Programs\Python\Python37\python.exe
+          # - so strip off the exe and substitute Scripts
+          # - convert the path to posix first
+          pythonExePathPosix="/$(echo $pythonExePath | sed 's/\\/\//g' | sed 's/://')"
+          pythonScriptsFolder="$(dirname $pythonExePathPosix)/Scripts"
+          echo $pythonScriptsFolder
+          $pythonScriptsFolder/aws s3 sync ../mkdocs-project/site ${versionFolder} ${dryrun} --delete --profile "$awsProfile"
+          exitStatus=$(expr ${exitStatus} + $?)
+        else
+          echo "ERROR: Unable to find Python installation location to find 'aws' script"
+          echo "ERROR: Make sure Python 3.x is installed on Windows so 'py' is available in PATH"
+        fi
+      fi
+    else
+      # For other Linux just try to run
+      aws s3 sync ../mkdocs-project/site ${versionFolder} ${dryrun} --delete --profile "$awsProfile"
+      exitStatus=$(expr ${exitStatus} + $?)
+    fi
   fi
-fi
+done
 
-read -p "Also copy documentation to 'latest' [y/n/q]? " answer
-exitStatusLatest=0
-if [ "${answer}" = "y" ]; then 
-  echo "Uploading documentation to:  ${s3LatestFolder}"
-  read -p "Continue [Y/n/q]? " answer
-  if [ -z "${answer}" -o "${answer}" = "y" -o "${answer}" = "Y" ]; then 
-    aws s3 sync ../mkdocs-project/site ${s3LatestFolder} ${dryrun} --delete --profile "$awsProfile"
-    exitStatusLatest=$?
-  elif [ "${answer}" = "q" ]; then 
-    exit 0
-  fi
-fi
-
-exitStatus=$(expr ${exitStatusVersion} + ${exitStatusLatest})
+exit ${exitStatus}

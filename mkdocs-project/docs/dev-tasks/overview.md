@@ -9,4 +9,5 @@ Details are provided on other pages.
 * [Documenting](documenting.md)
 * [Running](running.md)
 * [Testing](testing.md)
+* [Deploying](deploying.md)
 * [Creating Installer](creating-installer.md)
