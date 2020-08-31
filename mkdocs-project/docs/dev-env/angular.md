@@ -40,22 +40,20 @@ npm install -g @angular/cli
 ```
 
 This will install it globally, and the npm ls command from above can be used to confirm the
-installation. Now that the Angular CLI has been installed, its commands can be used.
-
-### Using localhost to run a local testing server
-
-In `infomapper`, serve up a local server by using the command
+installation. Now that the Angular CLI has been installed, its commands can be used. To confirm
+the CLI installation has been successful, type in the command
 
 ```
-ng serve --open
+ng version
 ```
 
-This will use localhost on default port `4200`. The `--open` option will automatically open the
-app in a new tab on your default browser. If a second project wants to be tested or run
-simultaneously, the command
+or
 
 ```
-ng serve --port <number> --open
+ng v
 ```
 
-can be used where `<number>` is an integer in between `1024` - `65,535` (and obviously not `4200`)
+This will display the Angular CLI version, Node version, Operating System, and Angular core version.
+It should look something like this:
+
+![Angular Version](../images/angular-version.png)

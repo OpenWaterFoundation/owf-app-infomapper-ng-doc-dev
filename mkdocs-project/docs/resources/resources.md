@@ -6,6 +6,7 @@ The following are useful resources listed alphabetically by major topic:
 * [Angular](#angular) - Angular web application framework
 * [GeoProcessor](#geoprocessor) - used to create map configuration files and process spatial data
 * [Leaflet](#leaflet) - used for web mapping
+* [Git](#git) - used for version control
 * [Markdown](#markdown) - documentation format
 * [MkDocs](#mkdocs) - documentation processing software
 * [QGIS](#qgis) - open source desktop GIS
@@ -32,6 +33,14 @@ The OWF GeoProcessor software is used to create map configuration files and auto
 The open source Leaflet software is used for web mapping:
 
 * [Leaflet web page](https://leafletjs.com/)
+
+## Git ##
+
+Git is the version control system used for InfoMapper development, with Github as the software
+development platform.
+
+* [Git](https://git-scm.com/)
+* [Github](https://github.com/)
 
 ## Markdown ##
 
