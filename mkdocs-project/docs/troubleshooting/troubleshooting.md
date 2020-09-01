@@ -6,6 +6,7 @@ Need to fill out similar to GeoProcessor.  Include common node and Angular error
 * [GeoProcessor](#geoprocessor)
     * [Incorrect Paths](#incorrect-paths)
 * [NPM Installation](#npm-installation)
+* [Raster-Layers](#raster-layers)
 * [Repository Issue Tracking](#repository-issue-tracking)
 
 ----
@@ -85,7 +86,34 @@ package, dependency, and peer dependency to check for security vulnerabilities. 
 a way for creators of a package to let the user know that any funding will help further work
 and/or support for the package. Both of these can be ignored.
 
-## Repository Issue Tracking
+## Raster Layers ##
+
+The InfoMapper uses Leaflet for maps and has many options for showing vector layers, but a surprisingly
+small amount of built-in options for raster layers. It mainly treats basemap (or background) maps as
+rasters and that's about it. To actually show a raster layers, a third-party package was decided upon.
+It was created by two developers, and its documentation was unfortunately lacking in some areas. A problem
+that OWF had to get through dealt with how this package, named `georaster-layer-for-leaflet`, is packaged
+and called in a deployed setting.
+
+This means that when working on a local testing server, the InfoMapper loaded everything in as normal, but
+when tried to push to Amazon S3 to be deployed on the internet, errors occurred. Essentially, the issue
+was that this package was trying to use Leaflet (which it extends from) before Leaflet was actually created.
+
+![Georaster Error](../images/georaster-error.png)
+<p style="text-align: center">[See full-size image](../images/georaster-error.png)</p>
+
+The solution that OWF came up with was to add the HTML tag defer to the
+end of the script that calls the main-es2015:
+
+```javascript
+<script src="main-es2015.3c2070bf8d0b1491e484.js" type="text/javascript" defer>
+```
+
+This ensures that the scripts go in order, as opposed to async, in which case order doesn't matter. Leaflet
+should be known, and the georaster package should have no more issues extending the Leaflet L object
+and doing what it needs to.
+
+## Repository Issue Tracking ##
 
 An issue may be due to a software bug or planned enhancement. See the
 [InfoMapper GitHub repository issues](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng/issues)
