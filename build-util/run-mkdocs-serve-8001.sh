@@ -13,40 +13,44 @@ checkMkdocsVersion() {
   requiredMajorVersion="1"
   # On Cygwin, mkdocs --version gives:  mkdocs, version 1.0.4 from /usr/lib/python3.6/site-packages/mkdocs (Python 3.6)
   # On Debian Linux, similar to Cygwin:  mkdocs, version 0.17.3
-  if [ "$operatingSystem" = "cygwin" -o "$operatingSystem" = "linux" ]; then
+  if [ "${operatingSystem}" = "cygwin" ] || [ "${operatingSystem}" = "linux" ]; then
     mkdocsVersionFull=$(mkdocs --version)
-  elif [ "$operatingSystem" = "mingw" ]; then
+    # Check if the last command worked, and if not, try `python3 -m mkdocs --version`.
+    if [ "$?" = "1" ]; then
+      mkdocsVersionFull=$(python3 -m mkdocs --version)
+    fi
+  elif [ "${operatingSystem}" = "mingw" ]; then
     mkdocsVersionFull=$(py -m mkdocs --version)
   else
     echo ""
-    echo "Don't know how to run on operating system $operatingSystem"
+    echo "Don't know how to run on operating system ${operatingSystem}"
     exit 1
   fi
-  echo "MkDocs --version:  $mkdocsVersionFull"
-  mkdocsVersion=$(echo $mkdocsVersionFull | cut -d ' ' -f 3)
-  echo "MkDocs full version number:  $mkdocsVersion"
-  mkdocsMajorVersion=$(echo $mkdocsVersion | cut -d '.' -f 1)
-  echo "MkDocs major version number:  $mkdocsMajorVersion"
-  if [ "$mkdocsMajorVersion" -lt $requiredMajorVersion ]; then
+  echo "MkDocs --version:  ${mkdocsVersionFull}"
+  mkdocsVersion=$(echo "${mkdocsVersionFull}" | cut -d ' ' -f 3)
+  echo "MkDocs full version number:  ${mkdocsVersion}"
+  mkdocsMajorVersion=$(echo "${mkdocsVersion}" | cut -d '.' -f 1)
+  echo "MkDocs major version number:  ${mkdocsMajorVersion}"
+  if [ "${mkdocsMajorVersion}" -lt ${requiredMajorVersion} ]; then
     echo ""
-    echo "MkDocs version for this documentation must be version $requiredMajorVersion or later."
-    echo "MkDocs mersion that is found is $mkdocsMajorVersion, from full version ${mkdocsVersion}."
+    echo "MkDocs version for this documentation must be version ${requiredMajorVersion} or later."
+    echo "MkDocs mersion that is found is ${mkdocsMajorVersion}, from full version ${mkdocsVersion}."
     exit 1
   else
     echo ""
-    echo "MkDocs major version ($mkdocsMajorVersion) is OK for this documentation."
+    echo "MkDocs major version (${mkdocsMajorVersion}) is OK for this documentation."
   fi
 }
 
 # Determine the operating system that is running the script
 # - mainly care whether Cygwin or MINGW
 checkOperatingSystem() {
-  if [ ! -z "${operatingSystem}" ]; then
+  if [ -n "${operatingSystem}" ]; then
     # Have already checked operating system so return
     return
   fi
   operatingSystem="unknown"
-  os=`uname | tr [a-z] [A-Z]`
+  os=$(uname | tr "[:lower:]" "[:upper:]")
   case "${os}" in
     CYGWIN*)
       operatingSystem="cygwin"
@@ -81,21 +85,25 @@ checkMkdocsVersion
 checkSourceDocs
 
 # Get the folder where this script is located since it may have been run from any folder
-scriptFolder=$(cd $(dirname "$0") && pwd)
+scriptFolder=$(cd "$(dirname "$0")" && pwd)
 # Change to the folder where the script is since other actions below are relative to that
-cd ${scriptFolder}
+cd "${scriptFolder}" || exit
 
 # Change to the MkDocs project folder so that 'mkdocs' can be run and find files it expects.
-cd ../mkdocs-project
+cd ../mkdocs-project || exit
 
 # Run 'mkdocs serve' using an appropriate variation of Python command line.
 echo "View the website using http://localhost:8001"
 echo "Stop the server with CTRL-C"
-if [ "$operatingSystem" = "cygwin" -o "$operatingSystem" = "linux" ]; then
+if [ "${operatingSystem}" = "cygwin" ] || [ "${operatingSystem}" = "linux" ]; then
   # For cygwin and linux, 'mkdocs' will probably be in the PATH
   echo "On Cygwin and Linux... running 'mkdocs serve...'"
   mkdocs serve -a 0.0.0.0:8001
-elif [ "$operatingSystem" = "mingw" ]; then
+  # Check if the last command worked, and if not, try `python3 -m mkdocs serve -a 0.0.0.0:8001`.
+  if [ "$?" = "1" ]; then
+    python3 -m mkdocs serve -a 0.0.0.0:8001
+  fi
+elif [ "${operatingSystem}" = "mingw" ]; then
   # This is used by Git Bash
   echo "On MinGW (Git Bash) ... running 'py -m mkdocs serve...'"
   py -m mkdocs serve -a 0.0.0.0:8001

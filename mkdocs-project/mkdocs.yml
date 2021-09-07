@@ -30,6 +30,7 @@ nav:
   - Git: 'dev-env/git.md'
   - Cygwin: 'dev-env/cygwin.md'
   - Running the InfoMapper: 'dev-env/running.md'
+- Testing: 'testing/testing.md'
 - Troubleshooting: 'troubleshooting/troubleshooting.md'
 - Resources: 'resources/resources.md'
 # ------- configuration properties ---------------
@@ -43,9 +44,9 @@ extra_css:
 # ------------------------------------------------
 # Google Analytics
 # - see:  https://squidfunk.github.io/mkdocs-material/getting-started/#google-analytics
-google_analytics:
- - 'UA-135465513-1'
- - auto
+# google_analytics:
+#  - 'UA-135465513-1'
+#  - auto
 # ------------------------------------------------
 # Favicon is supposed to automatically be found:
 # - in docs/img/favicon.ico
