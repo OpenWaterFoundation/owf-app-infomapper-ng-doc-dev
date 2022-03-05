@@ -19,6 +19,17 @@ the features of these tools may be limiting and have a cost barrier.
 There is a need for tools that can automate spatial data processing and publish information products.
 The OWF InfoMapper software is intended to provide a simple and flexible cloud publishing tool.
 
+> IMPORTANT NOTE: When the InfoMapper was started, it contained all files needed for
+the product to work. Over time, OWF made the decision to break up the code so that the InfoMapper
+became a shell that could create menus and static content pages only. The main functionality
+of the InfoMapper was moved to the
+[AppDev GitHub Repository](https://github.com/OpenWaterFoundation/owf-app-dev-ng) and created
+as an Angular library that will be referred to as the **Common library** or **Common package**.
+The library contains compartmentalized, commonly used code that can be granularly imported
+into other applications. This documentation will occasionally bring up this repository, as
+it is integral to running, testing, and deploying the InfoMapper. As a developer, it will be
+necessary to clone the AppDev repo if any updates or changes want to be done.
+
 ## InfoMapper Features ##
 
 The InfoMapper provides general features for displaying map and other information products.

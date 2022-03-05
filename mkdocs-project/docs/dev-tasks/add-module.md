@@ -4,6 +4,12 @@ Need to describe how to add a new module in Angular, conventions for the InfoMap
 
 ## Adding a Component from an Angular Library ##
 
+> NOTE: This section is no longer required, as the entire Common library is being installed
+and tested on the InfoMapper now. These instructions only import a specific Component,
+and need to be replaced. Running the `reinstall-common-lib.sh` script from the build-util/
+folder will perform all necessary tasks to build the library and install it in the
+InfoMapper `package.json`. More details will replace this page soon.
+
 The following are broad steps for implementing an Angular component from an Angular
 library. It will be using the Common library as an example. They assume user knowledge
 of library creation and building. For more information on creating Angular libraries,
@@ -13,7 +19,7 @@ on building, packing, and publishing the Common library, visit the
 page.
 
 * Build and/or publish the library whose component will be used. Building the library
-using `npm build --prod=true` and `npm pack` creates the necessary files in the
+using `npm build --configuration production` and `npm pack` creates the necessary files in the
 `dist/` folder, and packs them into a gzipped tarball; These files can be used for
 testing. Publishing - using npm for example - is used for production use of the library.
 * If the library was built and packed, import it into the Angular application's

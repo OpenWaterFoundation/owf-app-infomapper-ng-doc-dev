@@ -17,7 +17,7 @@ is required by Angular for installation. If Node has not been installed, instruc
 To confirm what npm packages have been installed globally on the system, the command
 
 ```
-npm ls -g --depth=0
+npm ls -g --depth 0
 ```
 
 can be used. This should display the globally installed version of npm. If the Angular

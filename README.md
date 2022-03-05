@@ -92,7 +92,7 @@ provide in-line table of contents at the top of pages, where appropriate, to fac
 
 ## License ##
 
-Copyright by the Open Water Foundation (2017-2020).
+Copyright by the Open Water Foundation (2017-2022).
 The documentation is licensed under the
 [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0/).
 

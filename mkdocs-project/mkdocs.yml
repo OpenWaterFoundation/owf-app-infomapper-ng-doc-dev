@@ -15,7 +15,7 @@ nav:
   - Editing Code: dev-tasks/editing.md
   - Adding a New Module: dev-tasks/add-module.md
   - Documenting: dev-tasks/documenting.md
-  - Running: dev-tasks/running.md
+  - Running & Usage: dev-tasks/running.md
   - Testing: dev-tasks/testing.md
   - Deploying: dev-tasks/deploying.md
   - Creating Installer: dev-tasks/creating-installer.md
