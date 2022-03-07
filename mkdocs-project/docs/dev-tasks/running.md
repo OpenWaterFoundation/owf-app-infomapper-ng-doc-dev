@@ -1,11 +1,8 @@
 # InfoMapper / Development Tasks / Running & Usage #
 
-The following sections describe 
-
-* [Running InfoMapper in a Dev Environment](#running-infomapper-in-a-dev-environment)
-* []()
-* [Embedding a Map Component in a website](#embedding-a-map-component-in-a-website)
-    * [Creating the Map Web Component](#creating-the-map-web-component)
+The following sections describe how to run the InfoMapper in different environments,
+and other ways to use singular elements of the InfoMapper, such as the Common library
+as a whole or specific components of it.
 
 ## Running InfoMapper in a Dev Environment
 
@@ -96,10 +93,115 @@ export class AppModule {
 ```
 
 Once the section of code above matches the same section in the `app.module.ts` file, 
-the `./create-common-package.sh -R` script can be run in the build-util/ folder from the
-`owf-app-dev-ng` repo. This will run `ng build` and concatenate the bundled file names
-into the file `map-component.VERSION.ts`, where VERSION is the current
+the command `./create-common-package.sh -R` script can be run in the build-util/ folder
+from the `owf-app-dev-ng` repo. This will run `ng build` and concatenate the bundled
+file names into the file `map-component.VERSION.ts`, where VERSION is the current
 InfoMapper version number (e.g. 3.0.0).
 
+Among other things, the `./create-common-package -R` command will manipulate the
+`dist/` folder in a way where the contents can be copy-pasted into a folder to be used by
+a website. Further instructions for implementing this is covered in the next section.
 
 ### Using the Map Component in a website ###
+
+It is assumed that the necessary dist/ files have been created at this point.
+Confirmation can be performed by checking for the `map-component.VERSION.js` file
+inside the `dist/angulardev/` folder in the `owf-app-dev-ng` repository. If the
+file hasn't been created yet, follow the instructions at
+[Creating the Map Web Component](#creating-the-map-web-component).
+
+#### Creating the correct `app-config.json` ####
+
+Normally the `app-config.json` file would contain menus to create and label for
+the website, but since a singular component is being used, the `mainMenu` property
+and array can be removed from the file. The `standaloneMap` property can be used
+instead, and is shown in the below `app-config.json` example contents:
+
+```json
+{
+  "title" : "InfoMapper",
+  "homePage": "/content-pages/home.md",
+  "favicon": "/img/OWF-Logo-Favicon-32x32.ico",
+  "dataUnitsPath": "/img/DATAUNIT",
+  "standaloneMap": {
+    "mapProject": "map-config.json"
+  },
+  "X_googleAnalyticsTrackingId": "UA-123456789-1",
+  "version": "1.0.0 (2020-12-01)"
+}
+```
+
+The `mapProject` property needs the path to the singular map configuration file.
+For more information on creating a map configuration file, visit the
+[GeoMapProject Documentation](https://software.openwaterfoundation.org/geoprocessor/latest/doc-user/appendix-geomapproject/geomapproject/#introduction).
+
+#### Embedded Map Component example ####
+
+The following describes the file/folder structure for the very simple standalone
+Map Component example:
+
+```text
+test-angular-folder/
+  angulardev/                     Arbitrarily named folder that holds all created files from
+                                  the angulardev/dist/ folder.
+  assets/                         The assets/ folder from the angulardev/dist/ folder. Note
+                                  this has been separated from the files that reside in
+                                  angulardev/. The assets/ folder must live in the same
+                                  directory as the index.html, since the assets/app top
+                                  level path is still used by the Map Component. The remaining
+                                  dist/ files could also be put in this test-angular-folder/
+                                  level, but it was moved for readability purposes.
+  index.html                      The simple index.html that makes use of script tags to
+                                  embed a Map Component.
+  run-server-8000.sh              Script to run a simple testing web server on port 8000
+                                  using Python.
+```
+
+#### The example index.html file ####
+
+Given the above organization of the component production files and folders, the
+example `index.html` file contents can look like the following:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="./angulardev/map-component.3.0.0.js"></script>
+    <link rel="stylesheet" href="./angulardev/styles.3.0.0.css">
+ </head>
+  <body>
+
+    <div style="height: 900px; width:1200px;">
+      <common-map app-config="assets/app/app-config.json"></common-map>
+    </div>
+
+  </body>
+</html>
+```
+
+A few things to note about the above contents:
+
+* Since the `./create-common-package.sh -R` command concatenated all production
+JavaScript files into one, only that `.js` file is needed in the first (and only)
+script tag. This cleans up the amount of scripts to be used.
+* The `<common-map>` tag's surrounding div tag is crucial to displaying on the page.
+In a regular Angular application, the component inherits its height and width from
+its parent, grandparent, etc. When creating the Component be itself, it needs some
+parent element to set its size. This will need to be explicitly provided.
+* In the angulardev application's `AppModule` constructor, the customElement was
+created with the name `common-map`, which is why it's used here to create the component.
+This can be changed to any other HTML tag name using the correct convention if desired.
+* The common-map tag's `app-config` attribute just needs the path to the `app-config.json`
+file to perform the actions necessary to display.
+
+#### Running the simple example ####
+
+In this simple example, the `./run-server-8000.sh` command will spin up the server
+on port 8000, and can be viewed by opening up a browser of choice and navigating
+to `localhost:8000`.
+
+>**NOTE:** The InfoMapper, Common library, and its components do not support
+Internet Explorer. All newly created OWF projects will use the most up-to-date
+practices that the newer browsers use, such as Google Chrome, Mozilla Firefox,
+Microsoft Edge, etc.
+
