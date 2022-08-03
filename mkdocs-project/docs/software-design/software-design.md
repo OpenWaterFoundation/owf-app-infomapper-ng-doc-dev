@@ -1,6 +1,7 @@
 # InfoMapper / Software Design #
 
-Need to fill in this documentation similar to GeoProcessor, with sections for major topics.
+Need to fill in this documentation similar to GeoProcessor, with sections for major
+topics.
 
 * [InfoMapper Design Background](#infomapper-design-background) - general background
 * [Application](#application) - application class
@@ -14,6 +15,7 @@ Need to fill in this documentation similar to GeoProcessor, with sections for ma
         * [Dialog Component](#dialog-component)
         * [Map Error Component](#map-error-component)
         * [StateMod Classes Component](#statemod-classes-component)
+* [Location Strategy](#location-strategy)
 
 ----------------------
 
@@ -33,60 +35,62 @@ The following are the Angular components used by the InfoMapper:
 
 ### App Component ###
 
-The first component to be made, and is in charge of the *application shell* - that is, what's
-displayed on the web page. It shows the `<app-nav-bar>` in its template (.html) file, which
-will show the menus. It also takes care of any 404 routing and updates Google Analytics when
-a user clicks from one map or content page to another.
+The first component to be made, and is in charge of the *application shell* - that
+is, what's displayed on the web page. It shows the `<app-nav-bar>` in its template
+(.html) file, which will show the menus. It also takes care of any 404 routing and
+updates Google Analytics when a user clicks from one map or content page to another.
 
 ----
 
 ### Nav Bar Component ###
 
-The Nav Bar Component reads in the app configuration file to start the process of assigning
-globally used variables, and oversees the creation of each menu button.
+The Nav Bar Component reads in the app configuration file to start the process of
+assigning globally used variables, and oversees the creation of each menu button.
 
 #### Tab Component ####
 
-Each Menu and sub-menu in the InfoMapper is a component itself, and its only purpose is to display
-itself as clickable or not, visible or not, and whether to display a map, content page, or external
-site when clicked depending on what the app configuration file contains.
+Each Menu and sub-menu in the InfoMapper is a component itself, and its only purpose
+is to display itself as clickable or not, visible or not, and whether to display
+a map, content page, or external site when clicked depending on what the app configuration
+file contains.
 
 ----
 
 ### Content Page Component ###
 
-The Content Page Component displays a scrollable Showdown created markdown file converted to HTML.
-These can be about the website or a home page.
+The Content Page Component displays a scrollable Showdown created markdown file converted
+to HTML. These can be about the website or a home page.
 
-### Map Components ###
+----
 
-The Map Component is the main component to display the Leaflet map in the InfoMapper. It is created,
-updated, styled, and destroyed when navigated away from. It uses the below components in helping
-with this. The map's side bar information and legend is also created here with text and shapes defined
-by the map configuration file.
+## Location Strategy ##
 
-#### Background Layer Component ####
+Angular offers two methods of displaying its application's paths in the URL,
+named location strategy. These are `PathLocationStrategy` and `HashLocationStrategy`.
+The InfoMapper previously utilized the HashLocationStrategy. This added a `#` into
+the URL at the beginning of the application's URL route. The full deployed URL would
+look something like:
 
-Each background layer is its own component when created and displayed in the maps sidebar, initially
-created by the map component above. Each one will show each background layer's name, description,
-and radio button in the sidebar.
+`https://poudre.openwaterfoundation.org/#/latest/content-page/home`
 
-#### Dialog Content ####
+This strategy was originally used to alleviate a more in-depth solution required
+with server-side routing (discussed below), and made deployment of the InfoMapper
+simpler. There are a few features that are negatively effected by this however,
+and the following are a few of them:
 
-When a feature on a Leaflet map is clicked, a popup will show up with that feature's information.
-Buttons can be configured in the InfoMapper by the developer for extra information in the form of
-a graph or more specific written text. When the button is clicked, what's called a Dialog will open,
-and can be treated as another window in the InfoMapper. This component takes care of displaying,
-sizing, styling, and other changes to the Dialog.
+* Search Engine Optimization (SEO) takes a hit.
+* Google Analytics cannot be as granular with its reporting.
+* Markdown files have trouble with internal links, as the hash is used for that
+process, making the URL contain two hashes.
 
-#### Map Error Component ####
+### Current Location Strategy ###
 
-Directs and routes the Angular application to a 404 page if an app or map configuration file is incorrect,
-a link is broken, or others routing issues are run across by the InfoMapper
+OWF made the decision to use the PathLocationStrategy to resolve the issue the
+HashLocationStrategy introduced. Now URLs will look like most other URLs:
 
-#### StateMod Classes Component ####
+`https://poudre.openwaterfoundation.org/latest/content-page/home`
 
-A standalone folder containing all classes converted from Java to TypeScript that parses and creates
-TimeSeries (TS) objects from the reading of DateValue (.dv) and StateMod (.stm) files. StateMod files
-were originally created by the State of Colorado, and DateValue file are a OWF created file that has
-more metadata than a CSV file.
+This change brought back the server side routing issues however, and a solution
+was required to fix it. This is gone into more detail in the
+[Dealing with server side routing](../deployment/deployment.md#dealing-with-server-side-routing)
+section under Deployment.

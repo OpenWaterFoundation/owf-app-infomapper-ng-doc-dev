@@ -31,6 +31,7 @@ nav:
   - Cygwin: 'dev-env/cygwin.md'
   - Running the InfoMapper: 'dev-env/running.md'
 - Testing: 'testing/testing.md'
+- Deployment: 'deployment/deployment.md'
 - Troubleshooting: 'troubleshooting/troubleshooting.md'
 - Resources: 'resources/resources.md'
 - Appendix - Graphing Properties: 'appendix-graphing-properties/graphing-properties.md'
