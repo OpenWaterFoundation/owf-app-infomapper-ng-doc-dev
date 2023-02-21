@@ -13,7 +13,7 @@ checkMkdocsVersion() {
   requiredMajorVersion="1"
   # On Cygwin, mkdocs --version gives:  mkdocs, version 1.0.4 from /usr/lib/python3.6/site-packages/mkdocs (Python 3.6)
   # On Debian Linux, similar to Cygwin:  mkdocs, version 0.17.3
-  if [ "${operatingSystem}" = "cygwin" ] || [ "${operatingSystem}" = "linux" ]; then
+  if [ "${operatingSystem}" = "cygwin" ] || [ "${operatingSystem}" = "linux" ] || [ "${operatingSystem}" = "macos" ]; then
     mkdocsVersionFull=$(mkdocs --version)
     # Check if the last command worked, and if not, try `python3 -m mkdocs --version`.
     if [ "$?" = "1" ]; then
@@ -61,6 +61,9 @@ checkOperatingSystem() {
     MINGW*)
       operatingSystem="mingw"
       ;;
+    DARWIN*)
+    operatingSystem="macos"
+    ;;
   esac
   echo "Detected operating system:  ${operatingSystem}"
 }
@@ -95,7 +98,7 @@ cd ../mkdocs-project || exit
 # Run 'mkdocs serve' using an appropriate variation of Python command line.
 echo "View the website using http://localhost:8001"
 echo "Stop the server with CTRL-C"
-if [ "${operatingSystem}" = "cygwin" ] || [ "${operatingSystem}" = "linux" ]; then
+if [ "${operatingSystem}" = "cygwin" ] || [ "${operatingSystem}" = "linux" ] || [ "${operatingSystem}" = "macos" ]; then
   # For cygwin and linux, 'mkdocs' will probably be in the PATH
   echo "On Cygwin and Linux... running 'mkdocs serve...'"
   mkdocs serve -a 0.0.0.0:8001
