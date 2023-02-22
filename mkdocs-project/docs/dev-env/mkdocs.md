@@ -3,7 +3,7 @@
 MkDocs must be installed in order to develop the user and developer documentation.
 
 * See the [MkDocs website](https://www.mkdocs.org/)
-* See the [OWF / Learn MkDocs / Install MkDocs](http://learn.openwaterfoundation.org/owf-learn-mkdocs/install/) documentation.
+* See the [OWF / Learn MkDocs / Install MkDocs](https://learn.openwaterfoundation.org/owf-learn-mkdocs/install/) documentation.
 
 The user/system Python is to run MkDocs.
 

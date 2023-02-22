@@ -19,14 +19,14 @@ The following are useful resources listed alphabetically by major topic:
 Angular is the web application framework used to develop the InfoMapper.
 
 * [Angular website](https://angular.io/)
-* [OWF / Learn Angular](http://learn.openwaterfoundation.org/owf-learn-angular/) - OWF learning resources for Angular, focusing on testing
+* [OWF / Learn Angular](https://learn.openwaterfoundation.org/owf-learn-angular/) - OWF learning resources for Angular, focusing on testing
 
 ## GeoProcessor ##
 
 The OWF GeoProcessor software is used to create map configuration files and automate processing of spatial data files.
 
-* [GeoProcessor product page](http://software.openwaterfoundation.org/geoprocessor/)
-* [GeoProcessor user documentation](http://software.openwaterfoundation.org/geoprocessor/latest/doc-user/)
+* [GeoProcessor product page](https://software.openwaterfoundation.org/geoprocessor/)
+* [GeoProcessor user documentation](https://software.openwaterfoundation.org/geoprocessor/latest/doc-user/)
 
 ## Leaflet ##
 
@@ -57,15 +57,15 @@ Markdown is widely used in the software industry.
 
 MkDocs is open source Python software that formats the developer and user documentation.
 
-* [MkDocs](http://www.mkdocs.org/) - MkDocs website
-* [OWF / Learn MkDocs](http://learn.openwaterfoundation.org/owf-learn-mkdocs/) - Open Water Foundation MkDocs learning resources
+* [MkDocs](https://www.mkdocs.org/) - MkDocs website
+* [OWF / Learn MkDocs](https://learn.openwaterfoundation.org/owf-learn-mkdocs/) - Open Water Foundation MkDocs learning resources
 
 ## QGIS ##
 
 QGIS is open source desktop GIS software that can be used to view and process spatial data.
 
 * [QGIS website](https://www.qgis.org)
-* [OWF / Learn QGIS](http://learn.openwaterfoundation.org/owf-learn-qgis/)
+* [OWF / Learn QGIS](https://learn.openwaterfoundation.org/owf-learn-qgis/)
 
 ## Visual Studio Code ##
 

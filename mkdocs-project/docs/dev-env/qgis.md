@@ -14,7 +14,7 @@ Multiple versions of standalone QGIS can be installed, including latest release 
 Important naming conventions help development environment tools use the correct versions.
 
 To install QGIS, follow instructions in the
-[OWF / Learn QGIS](http://learn.openwaterfoundation.org/owf-learn-qgis/install-qgis/install-qgis/) documentation.
+[OWF / Learn QGIS](https://learn.openwaterfoundation.org/owf-learn-qgis/install-qgis/install-qgis/) documentation.
 
 Additional installation steps, such as configuring the PyCharm virtual environment,
 and installing additional Python packages, are discussed in other sections of the documentation.

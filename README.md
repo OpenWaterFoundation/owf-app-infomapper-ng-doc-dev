@@ -1,13 +1,13 @@
 # owf-app-infomapper-ng-doc-dev #
 
-This repository contains the [Open Water Foundation (OWF)](http://openwaterfoundation.org/) InfoMapper software developer documentation.
+This repository contains the [Open Water Foundation (OWF)](https://openwaterfoundation.org/) InfoMapper software developer documentation.
 The documentation is written for software developers and some knowledge about technologies that are used is required. 
 However, an attempt has been made to avoid overly technical language.
 See the following resources:
 
 * [InfoMapper GitHub repository](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng)
-* Published latest [InfoMapper User Documentation](http://software.openwaterfoundation.org/infomapper/latest/doc-user/).
-* Published latest [InfoMapper Developer Documentation](http://software.openwaterfoundation.org/infomapper/latest/doc-dev/).
+* Published latest [InfoMapper User Documentation](https://software.openwaterfoundation.org/infomapper/latest/doc-user/).
+* Published latest [InfoMapper Developer Documentation](https://software.openwaterfoundation.org/infomapper/latest/doc-dev/).
 * InfoMapper software download page - must currently clone the [InfoMapper repository](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng)
 
 ## InfoMapper Software ##
@@ -49,7 +49,7 @@ owf-app-infomapper-ng-doc-dev/   Repository folder.
 
 The development environment for contributing to this project requires installation of Python, MkDocs, and Material MkDocs theme.
 Python 3 is used for development.
-See the [OWF / Learn MkDocs](http://learn.openwaterfoundation.org/owf-learn-mkdocs/)
+See the [OWF / Learn MkDocs](https://learn.openwaterfoundation.org/owf-learn-mkdocs/)
 documentation for information about installing these tools.
 
 The development environment will change as the developers upgrade to newer versions of software tools.
@@ -66,7 +66,7 @@ The `build-util/git-clone-all-prod.sh` script is provided to clone the documenta
 If the development environment is properly configured, edit and view content as follows:
 
 1. Run the `build-util/run-mkdocs-serve-8001.sh` script (Linux) or equivalent.
-2. View content in a web browser using URL `http://localhost:8000`.
+2. View content in a web browser using URL `localhost:8000`.
 3. Edit content in the `mkdocs-project/docs` folder and update `mkdocs-project/mkdocs.yml` as appropriate.
 	* Changes to files will cause the web browser page to refresh.
 	If necessary, refresh the browser page manually.
@@ -108,7 +108,7 @@ Contribute to the documentation as follows:
 
 ## Maintainers ##
 
-This repository is maintained by the [Open Water Foundation](http://openwaterfoundation.org/).
+This repository is maintained by the [Open Water Foundation](https://openwaterfoundation.org/).
 
 ## Release Notes ##
 

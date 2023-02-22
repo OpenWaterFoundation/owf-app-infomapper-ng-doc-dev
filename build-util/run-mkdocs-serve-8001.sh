@@ -96,7 +96,7 @@ cd "${scriptFolder}" || exit
 cd ../mkdocs-project || exit
 
 # Run 'mkdocs serve' using an appropriate variation of Python command line.
-echo "View the website using http://localhost:8001"
+echo "View the website using localhost:8001"
 echo "Stop the server with CTRL-C"
 if [ "${operatingSystem}" = "cygwin" ] || [ "${operatingSystem}" = "linux" ] || [ "${operatingSystem}" = "macos" ]; then
   # For cygwin and linux, 'mkdocs' will probably be in the PATH

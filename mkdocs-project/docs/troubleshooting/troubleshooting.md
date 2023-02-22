@@ -38,9 +38,9 @@ Using the same command while inside an Angular project will produce something li
 
 The GeoProcessor is what creates the a JSON file that the InfoMapper knows as the map configuration file.
 It can do much more as well, and the user documentation can be found
-[here](http://software.openwaterfoundation.org/geoprocessor/latest/doc-user/).
+[here](https://software.openwaterfoundation.org/geoprocessor/latest/doc-user/).
 Documentation for creating map configuration files can be found at the
-[GeoMapProject](http://software.openwaterfoundation.org/geoprocessor/latest/doc-user/appendix-geomapproject/geomapproject/).
+[GeoMapProject](https://software.openwaterfoundation.org/geoprocessor/latest/doc-user/appendix-geomapproject/geomapproject/).
 
 The GeoProcessor greatly helps with the creation of geoMapProjects so that geoLayers, geoLayerViews,
 and other parts of the geoMapProject so that they contain correct ID's and other references. In doing
@@ -53,7 +53,7 @@ One of the more common issues for maps not displaying is providing incorrect pat
 could be `.json`, `.geojson`, `.csv`, `.stm`, `.dv`, and possibly others. Try to keep this in mind
 when supplying the GeoProcessor with these paths. More information on how paths are used (absolute 
 or relative) by the InfoMapper can be viewed at the
-[user documentation](http://software.openwaterfoundation.org/infomapper/latest/doc-user/appendix-install/app-config/#path-specification).
+[user documentation](https://software.openwaterfoundation.org/infomapper/latest/doc-user/appendix-install/app-config/#path-specification).
 
 This can also include typos in the path, or the file not existing where it should. Open Water
 Foundation is actively trying to update and improve any errors for developers as well. If an

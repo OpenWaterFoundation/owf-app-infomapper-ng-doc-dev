@@ -4,7 +4,7 @@ This documentation provides resources to learn how to develop the
 Open Water Foundation (OWF) InfoMapper software,
 which is a web application to display maps and other information products.  See also:
 
-* Latest [InfoMapper User Documentation](http://software.openwaterfoundation.org/infomapper/latest/doc-user/)
+* Latest [InfoMapper User Documentation](https://software.openwaterfoundation.org/infomapper/latest/doc-user/)
 * InfoMapper download website - currently must be cloned from the
 [InfoMapper GitHub repository](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng)
 
@@ -21,14 +21,14 @@ The primary deployment environment is Amazon web services.
 
 ## About the Open Water Foundation ##
 
-The [Open Water Foundation](http://openwaterfoundation.org) is a nonprofit social enterprise that focuses
+The [Open Water Foundation](https://openwaterfoundation.org) is a nonprofit social enterprise that focuses
 on developing and supporting open source software for water resources, so that organizations can make better decisions about water.
 OWF also works to advance open data tools.
 The InfoMapper, which focuses on publishing information products,
 complements the GeoProcessor and TSTool software, which focus on on workflow automation and creating information products.
 These tools can be used to analyze complex water and land issues.
 
-See also other OWF [software tools](http://software.openwaterfoundation.org) and [learning resources](http://learn.openwaterfoundation.org).
+See also other OWF [software tools](https://software.openwaterfoundation.org) and [learning resources](https://learn.openwaterfoundation.org).
 
 ## How to Use this Documentation ##
 
@@ -43,7 +43,7 @@ The navigation menus may not be displayed if the web browser window is narrow or
 in which case look for a menu icon to access the menus.
 Use the search feature to find documentation matching the search words.
 
-See also the [OWF GeoProcessor User Documentation](http://software.openwaterfoundation.org/geoprocessor/latest/doc-user/),
+See also the [OWF GeoProcessor User Documentation](https://software.openwaterfoundation.org/geoprocessor/latest/doc-user/),
 which provides documentation for installing and using the GeoProcessor.
 
 ## License ##
@@ -60,4 +60,4 @@ The source files for this documentation are available in the
 
 ## Release Notes ##
 
-See the [InfoMapper release notes](http://software.openwaterfoundation.org/infomapper/latest/doc-user/appendix-release-notes/release-notes/).
+See the [InfoMapper release notes](https://software.openwaterfoundation.org/infomapper/latest/doc-user/appendix-release-notes/release-notes/).
