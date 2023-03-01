@@ -10,8 +10,6 @@
 
 ## Introduction 
 
-Need to fill this documentation out similar to GeoProcessor, but focusing on Angular environment.
-
 Until this documentation is filled in, see the
 [owf-app-infomapper-ng repository README](https://github.com/OpenWaterFoundation/owf-app-infomapper-ng).
 
